@@ -1,7 +1,12 @@
 import os
+from dotenv import load_dotenv
 from flask import Flask, request, session, g
 from config import config
 from app.extensions import db, login_manager, babel, mail, csrf
+
+# Load .env explicitly using absolute path so it works on PythonAnywhere
+_here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+load_dotenv(os.path.join(_here, '.env'))
 
 
 def get_locale():
