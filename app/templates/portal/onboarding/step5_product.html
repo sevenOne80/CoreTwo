@@ -1,0 +1,84 @@
+{% extends 'portal/base_portal.html' %}
+{% block title %}{{ _('Étape 5 — Sélection du produit') }}{% endblock %}
+
+{% block portal_content %}
+{% include 'portal/onboarding/_progress.html' %}
+
+<div class="ct-onboarding-card">
+  <div class="ct-onboarding-icon"><i class="bi bi-grid-1x2"></i></div>
+  <h3>{{ _('Choisissez votre produit') }}</h3>
+
+  {% set profile_labels = {'defensive': _('Défensif'), 'conservative': _('Conservateur'), 'balanced': _('Équilibré'), 'dynamic': _('Dynamique'), 'aggressive': _('Agressif')} %}
+  <div class="ct-profile-result mb-4">
+    <span class="ct-profile-badge">
+      <i class="bi bi-person-badge me-2"></i>
+      {{ _('Votre profil :') }} <strong>{{ profile_labels.get(profile.profile_type, profile.profile_type) }}</strong>
+      ({{ _('score') }} {{ profile.risk_score }}/100)
+    </span>
+  </div>
+
+  <form method="POST" novalidate>
+    {{ form.hidden_tag() }}
+
+    {% if products %}
+    <div class="ct-products-grid">
+      {% for product in products %}
+      <label class="ct-product-card" for="product_{{ product.id }}">
+        <input type="radio" name="product_id" id="product_{{ product.id }}"
+               value="{{ product.id }}" class="ct-product-radio">
+        <div class="ct-product-body">
+          <h5 class="ct-product-name">{{ product.name(current_lang) }}</h5>
+          <p class="ct-product-desc small text-muted">{{ product.description(current_lang) }}</p>
+          <div class="ct-product-stats">
+            {% if product.expected_return_min is not none %}
+            <span class="ct-product-stat">
+              <i class="bi bi-graph-up"></i>
+              {{ product.expected_return_min }}% — {{ product.expected_return_max }}%
+              <small>{{ _('rendement attendu') }}</small>
+            </span>
+            {% endif %}
+            <span class="ct-product-stat">
+              <i class="bi bi-currency-euro"></i>
+              {{ _('min.') }} {{ '{:,.0f}'.format(product.min_amount) }}€
+            </span>
+          </div>
+        </div>
+        <div class="ct-product-check"><i class="bi bi-check-circle-fill"></i></div>
+      </label>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert ct-info-box">
+      <i class="bi bi-info-circle me-2"></i>
+      {{ _('Aucun produit disponible pour votre profil actuellement. Notre équipe vous contactera dans les 24h.') }}
+    </div>
+    {% endif %}
+
+    {% if eligibility %}
+    <div class="mt-4">
+      <label class="form-label ct-form-label">{{ _('Montant à transférer (€)') }}</label>
+      <div class="ct-amount-input-wrap">
+        {{ form.amount(class='form-control ct-form-control ct-amount-input' + (' is-invalid' if form.amount.errors else ''),
+                       value=eligibility.transferable_amount | int if eligibility.transferable_amount else '') }}
+        <span class="ct-amount-suffix">€</span>
+      </div>
+      <div class="form-text">
+        {{ _('Montant disponible :') }} €{{ '{:,.2f}'.format(eligibility.transferable_amount or 0) }}
+      </div>
+      {% for error in form.amount.errors %}<div class="invalid-feedback d-block">{{ error }}</div>{% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="ct-onboarding-actions">
+      <a href="{{ url_for('portal.onboarding_step', step=4) }}" class="btn ct-btn-outline-secondary">
+        <i class="bi bi-arrow-left me-2"></i>{{ _('Retour') }}
+      </a>
+      {% if products %}
+      <button type="submit" class="btn ct-btn-primary">
+        {{ _('Confirmer') }} <i class="bi bi-arrow-right ms-2"></i>
+      </button>
+      {% endif %}
+    </div>
+  </form>
+</div>
+{% endblock %}

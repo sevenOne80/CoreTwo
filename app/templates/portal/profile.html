@@ -1,0 +1,43 @@
+{% extends 'portal/base_portal.html' %}
+{% block title %}{{ _('Mon profil') }}{% endblock %}
+
+{% block portal_content %}
+<div class="ct-portal-header">
+  <h2>{{ _('Mon profil') }}</h2>
+</div>
+
+<div class="row g-4">
+  <div class="col-lg-6">
+    <div class="ct-profile-card">
+      <h5><i class="bi bi-person me-2"></i>{{ _('Informations personnelles') }}</h5>
+      <div class="ct-profile-field"><label>{{ _('Prénom') }}</label><span>{{ user.first_name }}</span></div>
+      <div class="ct-profile-field"><label>{{ _('Nom') }}</label><span>{{ user.last_name }}</span></div>
+      <div class="ct-profile-field"><label>{{ _('Email') }}</label><span>{{ user.email }}</span></div>
+      {% if user.phone %}<div class="ct-profile-field"><label>{{ _('Téléphone') }}</label><span>{{ user.phone }}</span></div>{% endif %}
+      {% if user.national_number %}<div class="ct-profile-field"><label>{{ _('NISS') }}</label><span>{{ user.national_number }}</span></div>{% endif %}
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="ct-profile-card">
+      <h5><i class="bi bi-globe me-2"></i>{{ _('Préférences') }}</h5>
+      <div class="ct-profile-field">
+        <label>{{ _('Langue') }}</label>
+        <div class="d-flex gap-2 flex-wrap">
+          {% for lang in languages %}
+          <a href="{{ url_for('main.set_lang', lang=lang) }}"
+             class="ct-lang-btn {% if lang == current_lang %}active{% endif %}">
+            {{ lang | upper }}
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+      {% if user.profile %}
+      <div class="ct-profile-field">
+        <label>{{ _('Profil investisseur') }}</label>
+        <span class="ct-profile-badge-inline">{{ user.profile.profile_type | capitalize }}</span>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

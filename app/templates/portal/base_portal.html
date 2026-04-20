@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block body_class %}portal-page{% endblock %}
+
+{% block content %}
+<div class="ct-portal-layout">
+  <!-- Sidebar -->
+  <aside class="ct-sidebar">
+    <div class="ct-sidebar-user">
+      <div class="ct-sidebar-avatar">{{ current_user.first_name[0] }}{{ current_user.last_name[0] }}</div>
+      <div>
+        <div class="ct-sidebar-name">{{ current_user.full_name }}</div>
+        <div class="ct-sidebar-email">{{ current_user.email }}</div>
+      </div>
+    </div>
+    <nav class="ct-sidebar-nav">
+      <a href="{{ url_for('portal.dashboard') }}"
+         class="ct-sidebar-link {% if request.endpoint == 'portal.dashboard' %}active{% endif %}">
+        <i class="bi bi-speedometer2"></i> {{ _('Tableau de bord') }}
+      </a>
+      <a href="{{ url_for('portal.onboarding_step', step=1) }}"
+         class="ct-sidebar-link {% if 'onboarding' in request.endpoint %}active{% endif %}">
+        <i class="bi bi-arrow-right-circle"></i> {{ _('Mon onboarding') }}
+      </a>
+      <a href="{{ url_for('portal.documents') }}"
+         class="ct-sidebar-link {% if request.endpoint == 'portal.documents' %}active{% endif %}">
+        <i class="bi bi-file-earmark-text"></i> {{ _('Documents') }}
+      </a>
+      <a href="{{ url_for('portal.profile') }}"
+         class="ct-sidebar-link {% if request.endpoint == 'portal.profile' %}active{% endif %}">
+        <i class="bi bi-person"></i> {{ _('Mon profil') }}
+      </a>
+      <hr class="ct-sidebar-divider">
+      <a href="{{ url_for('auth.logout') }}" class="ct-sidebar-link ct-sidebar-logout">
+        <i class="bi bi-box-arrow-right"></i> {{ _('Déconnexion') }}
+      </a>
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <main class="ct-portal-main">
+    {% block portal_content %}{% endblock %}
+  </main>
+</div>
+{% endblock %}

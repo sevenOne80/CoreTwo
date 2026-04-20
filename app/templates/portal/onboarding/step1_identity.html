@@ -1,0 +1,41 @@
+{% extends 'portal/base_portal.html' %}
+{% block title %}{{ _('Étape 1 — Identité') }}{% endblock %}
+
+{% block portal_content %}
+{% include 'portal/onboarding/_progress.html' %}
+
+<div class="ct-onboarding-card">
+  <div class="ct-onboarding-icon"><i class="bi bi-person-badge"></i></div>
+  <h3>{{ _('Vos informations personnelles') }}</h3>
+  <p class="text-muted">{{ _('Ces informations sont nécessaires pour votre dossier de souscription et pour vérifier votre identité.') }}</p>
+
+  <form method="POST" novalidate>
+    {{ form.hidden_tag() }}
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label ct-form-label">{{ _('Numéro national (NISS)') }}</label>
+        {{ form.national_number(class='form-control ct-form-control' + (' is-invalid' if form.national_number.errors else ''),
+                                placeholder='YY.MM.DD-XXX.CC') }}
+        <div class="form-text">{{ _('Votre numéro de registre national belge à 11 chiffres.') }}</div>
+        {% for error in form.national_number.errors %}<div class="invalid-feedback">{{ error }}</div>{% endfor %}
+      </div>
+      <div class="col-md-6">
+        <label class="form-label ct-form-label">{{ _('Date de naissance') }}</label>
+        {{ form.birth_date(class='form-control ct-form-control' + (' is-invalid' if form.birth_date.errors else '')) }}
+        {% for error in form.birth_date.errors %}<div class="invalid-feedback">{{ error }}</div>{% endfor %}
+      </div>
+      <div class="col-md-6">
+        <label class="form-label ct-form-label">{{ _('Téléphone') }}</label>
+        {{ form.phone(class='form-control ct-form-control' + (' is-invalid' if form.phone.errors else ''),
+                      placeholder='+32 4XX XX XX XX') }}
+        {% for error in form.phone.errors %}<div class="invalid-feedback">{{ error }}</div>{% endfor %}
+      </div>
+    </div>
+    <div class="ct-onboarding-actions">
+      <button type="submit" class="btn ct-btn-primary">
+        {{ _('Continuer') }} <i class="bi bi-arrow-right ms-2"></i>
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}

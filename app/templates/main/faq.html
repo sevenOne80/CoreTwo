@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}FAQ{% endblock %}
+
+{% block content %}
+<section class="ct-page-hero ct-page-hero-sm">
+  <div class="ct-hero-overlay"></div>
+  <div class="container position-relative text-center">
+    <h1 class="ct-page-title">{{ _('Questions fréquentes') }}</h1>
+    <p class="ct-page-subtitle">{{ _('Tout ce que vous devez savoir sur le transfert de vos réserves de pension.') }}</p>
+  </div>
+</section>
+
+<section class="ct-section ct-section-white">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+
+        {% set faqs = [
+          (_('Qu\'est-ce que la branche 21 ?'), _('La branche 21 est un contrat d\'assurance-vie à rendement garanti. Votre capital est protégé et vous recevez un taux d\'intérêt minimum. L\'inconvénient est que ce rendement est souvent faible et peut être inférieur à l\'inflation.')),
+          (_('Qu\'est-ce que la branche 23 ?'), _('La branche 23 est un contrat d\'assurance-vie lié à des fonds d\'investissement. Il n\'y a pas de garantie de capital mais le potentiel de rendement est supérieur à la branche 21, selon l\'évolution des marchés et votre profil de risque.')),
+          (_('Puis-je transférer toutes mes réserves ?'), _('Pas nécessairement. Le transfert dépend de votre contrat actuel, de votre institution, du montant disponible et des conditions contractuelles. Notre analyse d\'éligibilité vous donnera une réponse précise après analyse de votre extrait mypension.be.')),
+          (_('Comment obtenir mon extrait mypension.be ?'), _('Rendez-vous sur mypension.be, connectez-vous avec votre eID ou itsme®, puis naviguez vers la section "Mes droits de pension" et téléchargez votre extrait complet au format PDF.')),
+          (_('Le service CoreTwo est-il payant ?'), _('L\'analyse d\'éligibilité et la création de compte sont entièrement gratuites. CoreTwo est rémunéré par les compagnies d\'assurance partenaires sous forme de commission, ce qui ne génère aucun coût direct pour vous.')),
+          (_('Mes données sont-elles en sécurité ?'), _('Oui. Toutes vos données sont chiffrées et stockées en Belgique. Nous respectons strictement le RGPD. Vos documents sont utilisés uniquement pour l\'analyse d\'éligibilité et la souscription, jamais vendus à des tiers.')),
+          (_('Combien de temps dure le processus ?'), _('L\'analyse est instantanée après téléchargement. Le questionnaire investisseur prend 5 minutes. La souscription complète est généralement réalisée en moins de 48h. Le transfert effectif auprès de votre ancienne institution peut prendre 2 à 4 semaines.')),
+          (_('Quel est le montant minimum pour transférer ?'), _('Le montant minimum pour initier un transfert est de 1 000 €. En dessous de ce seuil, un transfert n\'est généralement pas économiquement avantageux compte tenu des frais administratifs.')),
+        ] %}
+
+        <div class="accordion ct-accordion" id="faqAccordion">
+          {% for q, a in faqs %}
+          <div class="accordion-item ct-accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button {% if not loop.first %}collapsed{% endif %} ct-accordion-btn"
+                      type="button" data-bs-toggle="collapse"
+                      data-bs-target="#faq{{ loop.index }}">
+                {{ q }}
+              </button>
+            </h2>
+            <div id="faq{{ loop.index }}" class="accordion-collapse collapse {% if loop.first %}show{% endif %}"
+                 data-bs-parent="#faqAccordion">
+              <div class="accordion-body ct-accordion-body">{{ a }}</div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <div class="text-center mt-5">
+          <p class="text-muted">{{ _('Vous n\'avez pas trouvé votre réponse ?') }}</p>
+          <a href="{{ url_for('main.contact') }}" class="btn ct-btn-primary">
+            {{ _('Contactez-nous') }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

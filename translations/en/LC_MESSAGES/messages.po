@@ -1,0 +1,132 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: CoreTwo 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+
+msgid "Comment ça marche"
+msgstr "How it works"
+
+msgid "À propos"
+msgstr "About"
+
+msgid "Contact"
+msgstr "Contact"
+
+msgid "Connexion"
+msgstr "Login"
+
+msgid "Commencer"
+msgstr "Get started"
+
+msgid "CoreTwo - Transférez vos réserves de pension vers des investissements adaptés à votre profil"
+msgstr "CoreTwo - Move your pension reserves into investments matched to your profile"
+
+msgid "Optimisation de pension"
+msgstr "Pension optimisation"
+
+msgid "Libérez le potentiel de vos réserves de pension"
+msgstr "Unlock the potential of your pension reserves"
+
+msgid "Analysez gratuitement vos contrats de branche 21 et découvrez si vous pouvez optimiser vos rendements avec une branche 23 adaptée à votre profil."
+msgstr "Analyse your branch 21 contracts for free and discover if you can optimise your returns with a branch 23 product matched to your profile."
+
+msgid "Analyser ma pension"
+msgstr "Analyse my pension"
+
+msgid "Comment ça marche ?"
+msgstr "How does it work?"
+
+msgid "Réserves analysées"
+msgstr "Reserves analysed"
+
+msgid "Clients accompagnés"
+msgstr "Clients served"
+
+msgid "Processus en ligne"
+msgstr "Online process"
+
+msgid "Agréé BNB"
+msgstr "NBB approved"
+
+msgid "Mon espace"
+msgstr "My space"
+
+msgid "Documents"
+msgstr "Documents"
+
+msgid "Profil"
+msgstr "Profile"
+
+msgid "Déconnexion"
+msgstr "Logout"
+
+msgid "Votre partenaire pour optimiser vos réserves de pension."
+msgstr "Your partner for optimising pension reserves."
+
+msgid "Navigation"
+msgstr "Navigation"
+
+msgid "Créer un compte"
+msgstr "Create account"
+
+msgid "Tous droits réservés."
+msgstr "All rights reserved."
+
+msgid "Mentions légales"
+msgstr "Legal notice"
+
+msgid "Politique de confidentialité"
+msgstr "Privacy policy"
+
+msgid "reconnu"
+msgstr "approved"
+
+msgid "Tableau de bord"
+msgstr "Dashboard"
+
+msgid "Mon onboarding"
+msgstr "My onboarding"
+
+msgid "Mon profil"
+msgstr "My profile"
+
+msgid "Créer votre compte"
+msgstr "Create your account"
+
+msgid "Gratuit — sans engagement — analyse immédiate"
+msgstr "Free — no commitment — instant analysis"
+
+msgid "Prénom"
+msgstr "First name"
+
+msgid "Nom"
+msgstr "Last name"
+
+msgid "Adresse email"
+msgstr "Email address"
+
+msgid "Mot de passe"
+msgstr "Password"
+
+msgid "Confirmer le mot de passe"
+msgstr "Confirm password"
+
+msgid "Créer mon compte"
+msgstr "Create my account"
+
+msgid "Déjà un compte ?"
+msgstr "Already have an account?"
+
+msgid "Se connecter"
+msgstr "Sign in"
+
+msgid "Branche 21 vs Branche 23"
+msgstr "Branch 21 vs Branch 23"
+
+msgid "Bonjour,"
+msgstr "Hello,"
+
+msgid "Voici l'état de votre dossier."
+msgstr "Here is the status of your file."

@@ -1,0 +1,45 @@
+{% extends 'portal/base_portal.html' %}
+{% block title %}{{ _('Documents') }}{% endblock %}
+
+{% block portal_content %}
+<div class="ct-portal-header">
+  <h2>{{ _('Mes documents') }}</h2>
+  <a href="{{ url_for('portal.onboarding_step', step=2) }}" class="btn ct-btn-primary btn-sm">
+    <i class="bi bi-plus me-1"></i>{{ _('Nouvel extrait') }}
+  </a>
+</div>
+
+{% if extracts %}
+<div class="ct-doc-list">
+  {% for extract in extracts %}
+  <div class="ct-doc-item">
+    <div class="ct-doc-icon"><i class="bi bi-file-earmark-pdf"></i></div>
+    <div class="ct-doc-info">
+      <strong>{{ extract.filename }}</strong>
+      <span class="text-muted small">{{ extract.uploaded_at.strftime('%d/%m/%Y à %H:%M') }}</span>
+    </div>
+    <div class="ct-doc-status">
+      {% if extract.eligibility %}
+        {% if extract.eligibility.is_eligible %}
+        <span class="ct-badge-success"><i class="bi bi-check me-1"></i>{{ _('Éligible') }}</span>
+        {% else %}
+        <span class="ct-badge-warning"><i class="bi bi-x me-1"></i>{{ _('Non éligible') }}</span>
+        {% endif %}
+      {% else %}
+      <span class="ct-badge-neutral">{{ _('En attente') }}</span>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<div class="ct-empty-state">
+  <i class="bi bi-file-earmark-x"></i>
+  <h5>{{ _('Aucun document importé') }}</h5>
+  <p class="text-muted">{{ _('Importez votre extrait mypension.be pour commencer l\'analyse.') }}</p>
+  <a href="{{ url_for('portal.onboarding_step', step=2) }}" class="btn ct-btn-primary">
+    {{ _('Importer un extrait') }}
+  </a>
+</div>
+{% endif %}
+{% endblock %}

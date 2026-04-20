@@ -1,0 +1,208 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ _('Accueil') }}{% endblock %}
+{% block body_class %}home-page{% endblock %}
+
+{% block content %}
+
+<!-- ===== HERO ===== -->
+<section class="ct-hero">
+  <div class="ct-hero-overlay"></div>
+  <div class="container position-relative">
+    <div class="row">
+      <div class="col-lg-8 col-xl-7">
+        <p class="ct-hero-eyebrow">{{ _('Optimisation de pension') }}</p>
+        <h1 class="ct-hero-title">
+          {{ _('Libérez le potentiel de vos réserves de pension') }}
+        </h1>
+        <p class="ct-hero-subtitle">
+          {{ _('Analysez gratuitement vos contrats de branche 21 et découvrez si vous pouvez optimiser vos rendements avec une branche 23 adaptée à votre profil.') }}
+        </p>
+        <div class="ct-hero-actions">
+          <a href="{{ url_for('auth.register') }}" class="btn ct-btn-primary ct-btn-lg me-3">
+            <i class="bi bi-arrow-up-right-circle me-2"></i>{{ _('Analyser ma pension') }}
+          </a>
+          <a href="{{ url_for('main.how_it_works') }}" class="btn ct-btn-outline-light ct-btn-lg">
+            {{ _('Comment ça marche') }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRUST BAR ===== -->
+<section class="ct-trust-bar">
+  <div class="container">
+    <div class="row g-4 align-items-center justify-content-center text-center">
+      <div class="col-6 col-md-3">
+        <div class="ct-stat">
+          <span class="ct-stat-value">€ <span class="ct-counter" data-target="12">0</span>M+</span>
+          <span class="ct-stat-label">{{ _('Réserves analysées') }}</span>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="ct-stat">
+          <span class="ct-stat-value"><span class="ct-counter" data-target="850">0</span>+</span>
+          <span class="ct-stat-label">{{ _('Clients accompagnés') }}</span>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="ct-stat">
+          <span class="ct-stat-value"><span class="ct-counter" data-target="100">0</span>%</span>
+          <span class="ct-stat-label">{{ _('Processus en ligne') }}</span>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="ct-stat">
+          <span class="ct-stat-value"><i class="bi bi-shield-check ct-stat-icon"></i></span>
+          <span class="ct-stat-label">{{ _('Agréé BNB') }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS (TEASER) ===== -->
+<section class="ct-section ct-section-white">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-7 text-center">
+        <p class="ct-section-eyebrow">{{ _('Simple et rapide') }}</p>
+        <h2 class="ct-section-title">{{ _('Comment ça marche ?') }}</h2>
+        <p class="ct-section-subtitle">
+          {{ _('Un processus entièrement digital, de l\'analyse à la souscription, en quelques étapes simples.') }}
+        </p>
+      </div>
+    </div>
+    <div class="row g-4">
+      {% set steps = [
+        ('bi-cloud-upload', _('Importez votre extrait'), _('Téléchargez votre extrait mypension.be. Notre système l\'analyse automatiquement pour identifier vos contrats de branche 21.')),
+        ('bi-graph-up-arrow', _('Analyse d\'éligibilité'), _('Nous vérifions si vos réserves peuvent être transférées vers une branche 23, selon les règles en vigueur.')),
+        ('bi-person-badge', _('Votre profil investisseur'), _('Un questionnaire MiFID vous classe en profil défensif, équilibré ou dynamique pour une sélection adaptée.')),
+        ('bi-pen', _('Souscription en ligne'), _('Signez votre contrat électroniquement. L\'ensemble du processus se fait sans déplacement.')),
+      ] %}
+      {% for icon, title, desc in steps %}
+      <div class="col-md-6 col-lg-3">
+        <div class="ct-step-card">
+          <div class="ct-step-number">{{ loop.index }}</div>
+          <div class="ct-step-icon"><i class="bi {{ icon }}"></i></div>
+          <h5 class="ct-step-title">{{ title }}</h5>
+          <p class="ct-step-desc">{{ desc }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="text-center mt-5">
+      <a href="{{ url_for('main.how_it_works') }}" class="btn ct-btn-outline-primary">
+        {{ _('En savoir plus') }} <i class="bi bi-arrow-right ms-1"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHY CORETWO ===== -->
+<section class="ct-section ct-section-gray">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-7 text-center">
+        <p class="ct-section-eyebrow">{{ _('Nos engagements') }}</p>
+        <h2 class="ct-section-title">{{ _('Pourquoi CoreTwo ?') }}</h2>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="ct-approach-card">
+          <div class="ct-approach-img" style="background: linear-gradient(135deg, #1B2A4A 0%, #2d4a7a 100%);">
+            <i class="bi bi-shield-lock ct-approach-img-icon"></i>
+          </div>
+          <div class="ct-approach-body">
+            <h5>{{ _('Sécurité & conformité') }}</h5>
+            <p>{{ _('Nous travaillons exclusivement avec des compagnies d\'assurance reconnues par la BNB comme institutions de pension. Vos données sont chiffrées et protégées selon les normes GDPR.') }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="ct-approach-card">
+          <div class="ct-approach-img" style="background: linear-gradient(135deg, #C9A84C 0%, #e8c56e 100%);">
+            <i class="bi bi-person-check ct-approach-img-icon"></i>
+          </div>
+          <div class="ct-approach-body">
+            <h5>{{ _('Accompagnement personnalisé') }}</h5>
+            <p>{{ _('Votre profil investisseur guide la sélection du produit. Pas de solution générique — chaque client reçoit une proposition adaptée à sa situation et ses objectifs.') }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="ct-approach-card">
+          <div class="ct-approach-img" style="background: linear-gradient(135deg, #2d7d6f 0%, #4aab99 100%);">
+            <i class="bi bi-lightning ct-approach-img-icon"></i>
+          </div>
+          <div class="ct-approach-body">
+            <h5>{{ _('100%% digital') }}</h5>
+            <p>{{ _('De l\'analyse à la signature, tout se fait en ligne. Aucun rendez-vous, aucun courrier — votre pension optimisée en quelques jours seulement.') }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BRANCH 21 vs 23 ===== -->
+<section class="ct-section ct-section-white">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5">
+        <p class="ct-section-eyebrow">{{ _('Comprendre') }}</p>
+        <h2 class="ct-section-title">{{ _('Branche 21 vs Branche 23') }}</h2>
+        <p class="text-muted">
+          {{ _('La branche 21 offre un taux garanti souvent inférieur à l\'inflation. La branche 23 vous permet de participer à la performance des marchés financiers, avec un profil de risque que vous choisissez.') }}
+        </p>
+        <a href="{{ url_for('main.how_it_works') }}" class="btn ct-btn-primary mt-3">
+          {{ _('Découvrir les avantages') }}
+        </a>
+      </div>
+      <div class="col-lg-7">
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="ct-compare-card ct-compare-b21">
+              <div class="ct-compare-badge">{{ _('Branche 21') }}</div>
+              <ul class="ct-compare-list">
+                <li><i class="bi bi-check-circle-fill text-success"></i> {{ _('Capital garanti') }}</li>
+                <li><i class="bi bi-check-circle-fill text-success"></i> {{ _('Taux minimum') }}</li>
+                <li><i class="bi bi-x-circle-fill text-danger"></i> {{ _('Rendement limité') }}</li>
+                <li><i class="bi bi-x-circle-fill text-danger"></i> {{ _('Souvent < inflation') }}</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="ct-compare-card ct-compare-b23">
+              <div class="ct-compare-badge ct-badge-gold">{{ _('Branche 23') }}</div>
+              <ul class="ct-compare-list">
+                <li><i class="bi bi-check-circle-fill text-success"></i> {{ _('Potentiel de croissance') }}</li>
+                <li><i class="bi bi-check-circle-fill text-success"></i> {{ _('Profil adapté') }}</li>
+                <li><i class="bi bi-check-circle-fill text-success"></i> {{ _('Diversification') }}</li>
+                <li><i class="bi bi-dash-circle-fill text-warning"></i> {{ _('Risque maîtrisé') }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA SECTION ===== -->
+<section class="ct-cta-section">
+  <div class="container text-center">
+    <h2 class="ct-cta-title">{{ _('Prêt à analyser votre pension ?') }}</h2>
+    <p class="ct-cta-subtitle">
+      {{ _('Créez votre compte gratuitement et téléchargez votre extrait mypension.be en moins de 5 minutes.') }}
+    </p>
+    <a href="{{ url_for('auth.register') }}" class="btn ct-btn-primary ct-btn-lg">
+      <i class="bi bi-arrow-up-right-circle me-2"></i>{{ _('Commencer gratuitement') }}
+    </a>
+  </div>
+</section>
+
+{% endblock %}

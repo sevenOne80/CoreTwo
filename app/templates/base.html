@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="{{ current_lang }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{% block meta_description %}{{ _('CoreTwo - Transférez vos réserves de pension vers des investissements adaptés à votre profil') }}{% endblock %}">
+  <title>{% block title %}CoreTwo{% endblock %} — CoreTwo</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+  {% block extra_head %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar navbar-expand-lg ct-navbar" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand ct-brand" href="{{ url_for('main.index') }}">
+      <span class="ct-logo-icon">C<span class="ct-logo-two">2</span></span>
+      <span class="ct-logo-text">CoreTwo</span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarNav" aria-controls="navbarNav"
+            aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint == 'main.how_it_works' %}active{% endif %}"
+             href="{{ url_for('main.how_it_works') }}">{{ _('Comment ça marche') }}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint == 'main.about' %}active{% endif %}"
+             href="{{ url_for('main.about') }}">{{ _('À propos') }}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint == 'main.faq' %}active{% endif %}"
+             href="{{ url_for('main.faq') }}">FAQ</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint == 'main.contact' %}active{% endif %}"
+             href="{{ url_for('main.contact') }}">{{ _('Contact') }}</a>
+        </li>
+
+        <!-- Language switcher -->
+        <li class="nav-item dropdown ct-lang-dropdown">
+          <a class="nav-link dropdown-toggle ct-lang-toggle" href="#" role="button"
+             data-bs-toggle="dropdown">
+            {{ current_lang | upper }}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end ct-lang-menu">
+            {% for lang in languages %}
+            <li>
+              <a class="dropdown-item {% if lang == current_lang %}active{% endif %}"
+                 href="{{ url_for('main.set_lang', lang=lang) }}">
+                {% if lang == 'fr' %}🇫🇷 Français
+                {% elif lang == 'nl' %}🇳🇱 Nederlands
+                {% else %}🇬🇧 English{% endif %}
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </li>
+
+        {% if current_user.is_authenticated %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+            <i class="bi bi-person-circle me-1"></i>{{ current_user.first_name }}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="{{ url_for('portal.dashboard') }}">
+              <i class="bi bi-speedometer2 me-2"></i>{{ _('Mon espace') }}</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('portal.documents') }}">
+              <i class="bi bi-file-earmark-text me-2"></i>{{ _('Documents') }}</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('portal.profile') }}">
+              <i class="bi bi-gear me-2"></i>{{ _('Profil') }}</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger" href="{{ url_for('auth.logout') }}">
+              <i class="bi bi-box-arrow-right me-2"></i>{{ _('Déconnexion') }}</a></li>
+          </ul>
+        </li>
+        {% else %}
+        <li class="nav-item ms-lg-2">
+          <a class="nav-link" href="{{ url_for('auth.login') }}">{{ _('Connexion') }}</a>
+        </li>
+        <li class="nav-item ms-lg-1">
+          <a class="btn ct-btn-primary btn-sm px-3" href="{{ url_for('auth.register') }}">
+            {{ _('Commencer') }}
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== FLASH MESSAGES ===== -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<div class="ct-alerts">
+  <div class="container">
+    {% for category, message in messages %}
+    <div class="alert alert-{{ 'danger' if category == 'danger' else 'success' if category == 'success' else 'info' }} alert-dismissible fade show" role="alert">
+      {{ _(message) }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+{% endwith %}
+
+<!-- ===== MAIN CONTENT ===== -->
+{% block content %}{% endblock %}
+
+<!-- ===== FOOTER ===== -->
+<footer class="ct-footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="ct-footer-brand mb-3">
+          <span class="ct-logo-icon ct-logo-light">C<span class="ct-logo-two">2</span></span>
+          <span class="ct-logo-text ct-logo-text-light">CoreTwo</span>
+        </div>
+        <p class="ct-footer-tagline">{{ _('Votre partenaire pour optimiser vos réserves de pension.') }}</p>
+        <p class="ct-footer-legal small">{{ _('CoreTwo est un courtier en assurances agréé, travaillant avec des compagnies reconnues par la BNB comme institutions de pension.') }}</p>
+      </div>
+      <div class="col-lg-2 col-6">
+        <h6 class="ct-footer-heading">{{ _('Navigation') }}</h6>
+        <ul class="ct-footer-links">
+          <li><a href="{{ url_for('main.how_it_works') }}">{{ _('Comment ça marche') }}</a></li>
+          <li><a href="{{ url_for('main.about') }}">{{ _('À propos') }}</a></li>
+          <li><a href="{{ url_for('main.faq') }}">FAQ</a></li>
+          <li><a href="{{ url_for('main.contact') }}">{{ _('Contact') }}</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2 col-6">
+        <h6 class="ct-footer-heading">{{ _('Mon espace') }}</h6>
+        <ul class="ct-footer-links">
+          <li><a href="{{ url_for('auth.register') }}">{{ _('Créer un compte') }}</a></li>
+          <li><a href="{{ url_for('auth.login') }}">{{ _('Connexion') }}</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4">
+        <h6 class="ct-footer-heading">{{ _('Contact') }}</h6>
+        <ul class="ct-footer-links ct-footer-contact">
+          <li><i class="bi bi-geo-alt me-2"></i>Brussels, Belgium</li>
+          <li><i class="bi bi-envelope me-2"></i><a href="mailto:info@coretwo.be">info@coretwo.be</a></li>
+        </ul>
+        <div class="ct-footer-badges mt-3">
+          <span class="ct-badge-bnb"><i class="bi bi-shield-check me-1"></i>BNB {{ _('reconnu') }}</span>
+          <span class="ct-badge-gdpr"><i class="bi bi-lock me-1"></i>GDPR</span>
+        </div>
+      </div>
+    </div>
+    <hr class="ct-footer-divider">
+    <div class="row">
+      <div class="col-md-6 text-muted small">
+        &copy; {{ now.year if now else '2025' }} CoreTwo. {{ _('Tous droits réservés.') }}
+      </div>
+      <div class="col-md-6 text-end">
+        <a href="#" class="ct-footer-small-link">{{ _('Mentions légales') }}</a>
+        <a href="#" class="ct-footer-small-link ms-3">{{ _('Politique de confidentialité') }}</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% block extra_scripts %}{% endblock %}
+</body>
+</html>

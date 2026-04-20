@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block title %}{{ _('Créer un compte') }}{% endblock %}
+{% block body_class %}auth-page{% endblock %}
+
+{% block content %}
+<div class="ct-auth-wrapper">
+  <div class="ct-auth-card ct-auth-card-wide">
+    <div class="ct-auth-header">
+      <a href="{{ url_for('main.index') }}" class="ct-auth-logo">
+        <span class="ct-logo-icon">C<span class="ct-logo-two">2</span></span>
+        <span class="ct-logo-text">CoreTwo</span>
+      </a>
+      <h2 class="ct-auth-title">{{ _('Créer votre compte') }}</h2>
+      <p class="ct-auth-subtitle">{{ _('Gratuit — sans engagement — analyse immédiate') }}</p>
+    </div>
+
+    <form method="POST" action="{{ url_for('auth.register') }}" novalidate class="ct-auth-form">
+      {{ form.hidden_tag() }}
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label ct-form-label">{{ _('Prénom') }}</label>
+          {{ form.first_name(class='form-control ct-form-control' + (' is-invalid' if form.first_name.errors else ''),
+                             placeholder=_('Prénom'), autocomplete='given-name') }}
+          {% for error in form.first_name.errors %}<div class="invalid-feedback">{{ error }}</div>{% endfor %}
+        </div>
+        <div class="col-md-6">
+          <label class="form-label ct-form-label">{{ _('Nom') }}</label>
+          {{ form.last_name(class='form-control ct-form-control' + (' is-invalid' if form.last_name.errors else ''),
+                            placeholder=_('Nom'), autocomplete='family-name') }}
+          {% for error in form.last_name.errors %}<div class="invalid-feedback">{{ error }}</div>{% endfor %}
+        </div>
+        <div class="col-12">
+          <label class="form-label ct-form-label">{{ _('Adresse email') }}</label>
+          {{ form.email(class='form-control ct-form-control' + (' is-invalid' if form.email.errors else ''),
+                        placeholder='email@exemple.be', autocomplete='email') }}
+          {% for error in form.email.errors %}<div class="invalid-feedback">{{ error }}</div>{% endfor %}
+        </div>
+        <div class="col-md-6">
+          <label class="form-label ct-form-label">{{ _('Mot de passe') }}</label>
+          {{ form.password(class='form-control ct-form-control' + (' is-invalid' if form.password.errors else ''),
+                           placeholder='••••••••', autocomplete='new-password') }}
+          {% for error in form.password.errors %}<div class="invalid-feedback">{{ error }}</div>{% endfor %}
+        </div>
+        <div class="col-md-6">
+          <label class="form-label ct-form-label">{{ _('Confirmer le mot de passe') }}</label>
+          {{ form.password2(class='form-control ct-form-control' + (' is-invalid' if form.password2.errors else ''),
+                            placeholder='••••••••', autocomplete='new-password') }}
+          {% for error in form.password2.errors %}<div class="invalid-feedback">{{ error }}</div>{% endfor %}
+        </div>
+        <div class="col-12">
+          <div class="ct-gdpr-box">
+            <div class="form-check">
+              {{ form.gdpr_consent(class='form-check-input' + (' is-invalid' if form.gdpr_consent.errors else '')) }}
+              <label class="form-check-label small">
+                {{ _('J\'accepte la') }}
+                <a href="#" class="ct-form-link">{{ _('politique de confidentialité') }}</a>
+                {{ _('et le traitement de mes données personnelles conformément au RGPD.') }}
+              </label>
+              {% for error in form.gdpr_consent.errors %}
+              <div class="invalid-feedback">{{ error }}</div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <div class="col-12 mt-2">
+          <button type="submit" class="btn ct-btn-primary w-100 ct-btn-lg">
+            <i class="bi bi-person-plus me-2"></i>{{ _('Créer mon compte') }}
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <p class="ct-auth-switch">
+      {{ _('Déjà un compte ?') }}
+      <a href="{{ url_for('auth.login') }}">{{ _('Se connecter') }}</a>
+    </p>
+  </div>
+</div>
+{% endblock %}

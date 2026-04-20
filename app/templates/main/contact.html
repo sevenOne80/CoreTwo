@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block title %}{{ _('Contact') }}{% endblock %}
+
+{% block content %}
+<section class="ct-page-hero ct-page-hero-sm">
+  <div class="ct-hero-overlay"></div>
+  <div class="container position-relative text-center">
+    <h1 class="ct-page-title">{{ _('Contactez-nous') }}</h1>
+    <p class="ct-page-subtitle">{{ _('Notre équipe répond dans les 24 heures ouvrables.') }}</p>
+  </div>
+</section>
+
+<section class="ct-section ct-section-white">
+  <div class="container">
+    <div class="row g-5 justify-content-center">
+      <div class="col-lg-5">
+        <h4 class="mb-4">{{ _('Envoyez-nous un message') }}</h4>
+        {% if request.args.get('sent') %}
+        <div class="alert alert-success">
+          <i class="bi bi-check-circle me-2"></i>{{ _('Votre message a été envoyé. Nous vous répondrons dans les plus brefs délais.') }}
+        </div>
+        {% else %}
+        <form method="POST" action="{{ url_for('main.contact') }}" novalidate>
+          {{ form.hidden_tag() }}
+          <div class="mb-3">
+            <label class="form-label ct-form-label">{{ _('Nom complet') }}</label>
+            {{ form.name(class='form-control ct-form-control' + (' is-invalid' if form.name.errors else ''), placeholder=_('Jean Dupont')) }}
+            {% for error in form.name.errors %}<div class="invalid-feedback">{{ error }}</div>{% endfor %}
+          </div>
+          <div class="mb-3">
+            <label class="form-label ct-form-label">{{ _('Email') }}</label>
+            {{ form.email(class='form-control ct-form-control' + (' is-invalid' if form.email.errors else ''), placeholder='jean@exemple.be') }}
+            {% for error in form.email.errors %}<div class="invalid-feedback">{{ error }}</div>{% endfor %}
+          </div>
+          <div class="mb-3">
+            <label class="form-label ct-form-label">{{ _('Sujet') }}</label>
+            {{ form.subject(class='form-control ct-form-control' + (' is-invalid' if form.subject.errors else '')) }}
+            {% for error in form.subject.errors %}<div class="invalid-feedback">{{ error }}</div>{% endfor %}
+          </div>
+          <div class="mb-4">
+            <label class="form-label ct-form-label">{{ _('Message') }}</label>
+            {{ form.message(class='form-control ct-form-control' + (' is-invalid' if form.message.errors else ''), rows=5) }}
+            {% for error in form.message.errors %}<div class="invalid-feedback">{{ error }}</div>{% endfor %}
+          </div>
+          <button type="submit" class="btn ct-btn-primary w-100">
+            <i class="bi bi-send me-2"></i>{{ _('Envoyer le message') }}
+          </button>
+        </form>
+        {% endif %}
+      </div>
+
+      <div class="col-lg-4 offset-lg-1">
+        <h4 class="mb-4">{{ _('Informations') }}</h4>
+        <div class="ct-contact-info">
+          <div class="ct-contact-item">
+            <i class="bi bi-envelope-fill ct-contact-icon"></i>
+            <div>
+              <strong>{{ _('Email') }}</strong>
+              <p><a href="mailto:info@coretwo.be">info@coretwo.be</a></p>
+            </div>
+          </div>
+          <div class="ct-contact-item">
+            <i class="bi bi-geo-alt-fill ct-contact-icon"></i>
+            <div>
+              <strong>{{ _('Adresse') }}</strong>
+              <p>Brussels, Belgium</p>
+            </div>
+          </div>
+          <div class="ct-contact-item">
+            <i class="bi bi-clock-fill ct-contact-icon"></i>
+            <div>
+              <strong>{{ _('Heures de bureau') }}</strong>
+              <p>{{ _('Lundi — Vendredi, 9h — 17h') }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="ct-regulatory-note mt-4">
+          <i class="bi bi-shield-check me-2"></i>
+          {{ _('CoreTwo opère conformément à la réglementation belge en matière d\'assurance et de protection des données.') }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

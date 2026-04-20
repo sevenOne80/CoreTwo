@@ -1,0 +1,67 @@
+{% extends 'portal/base_portal.html' %}
+{% block title %}{{ _('Étape 4 — Profil investisseur') }}{% endblock %}
+
+{% block content %}
+{% include 'portal/onboarding/_progress.html' %}
+
+<div class="ct-onboarding-card">
+  <div class="ct-onboarding-icon"><i class="bi bi-clipboard-check"></i></div>
+  <h3>{{ _('Votre profil investisseur') }}</h3>
+  <p class="text-muted">{{ _('Ce questionnaire MiFID nous permet de vous proposer des produits adaptés à votre situation. Il prend environ 5 minutes.') }}</p>
+
+  <form method="POST" novalidate>
+    {{ form.hidden_tag() }}
+
+    {% set questions = [
+      (form.q1, _('Quel est votre horizon d\'investissement ?'), [
+        _('Moins de 3 ans'), _('3 à 5 ans'), _('5 à 10 ans'), _('10 à 20 ans'), _('Plus de 20 ans')
+      ]),
+      (form.q2, _('Quel est votre objectif principal ?'), [
+        _('Préserver mon capital'), _('Revenus réguliers'), _('Croissance modérée'), _('Croissance maximale')
+      ]),
+      (form.q3, _('Quelle perte temporaire pourriez-vous accepter sur votre investissement ?'), [
+        _('Aucune perte'), _('Jusqu\'à 5%%'), _('Jusqu\'à 10%%'), _('Jusqu\'à 25%%'), _('Plus de 25%%')
+      ]),
+      (form.q4, _('Si votre investissement perd 15%% en un mois, vous :'), [
+        _('Vendez immédiatement'), _('Vendez une partie'), _('Attendez'), _('Achetez davantage')
+      ]),
+      (form.q5, _('Comment évaluez-vous vos connaissances financières ?'), [
+        _('Débutant'), _('Basiques'), _('Intermédiaires'), _('Avancées')
+      ]),
+      (form.q6, _('Quelle est votre expérience avec les produits d\'investissement ?'), [
+        _('Aucune'), _('Moins de 2 ans'), _('2 à 5 ans'), _('Plus de 5 ans')
+      ]),
+      (form.q7, _('Quelle est la stabilité de vos revenus ?'), [
+        _('Instables'), _('Stables avec variations'), _('Très stables')
+      ]),
+      (form.q8, _('Quelle part de vos économies représente cet investissement ?'), [
+        _('Plus de 75%%'), _('50 à 75%%'), _('25 à 50%%'), _('Moins de 25%%')
+      ]),
+    ] %}
+
+    {% for field, question, options in questions %}
+    <div class="ct-question-block">
+      <p class="ct-question-text">{{ loop.index }}. {{ question }}</p>
+      <div class="ct-radio-group">
+        {% for i, option in options | enumerate(1) %}
+        <label class="ct-radio-option">
+          <input type="radio" name="{{ field.name }}" value="{{ i }}"
+                 {% if field.data == i|string %}checked{% endif %}> {{ option }}
+        </label>
+        {% endfor %}
+      </div>
+      {% for error in field.errors %}<p class="text-danger small mt-1">{{ error }}</p>{% endfor %}
+    </div>
+    {% endfor %}
+
+    <div class="ct-onboarding-actions">
+      <a href="{{ url_for('portal.onboarding_step', step=3) }}" class="btn ct-btn-outline-secondary">
+        <i class="bi bi-arrow-left me-2"></i>{{ _('Retour') }}
+      </a>
+      <button type="submit" class="btn ct-btn-primary">
+        {{ _('Voir mon profil') }} <i class="bi bi-arrow-right ms-2"></i>
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}

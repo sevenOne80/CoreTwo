@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}{{ _('Comment ça marche') }}{% endblock %}
+
+{% block content %}
+<section class="ct-page-hero ct-page-hero-sm">
+  <div class="ct-hero-overlay"></div>
+  <div class="container position-relative text-center">
+    <h1 class="ct-page-title">{{ _('Comment ça marche ?') }}</h1>
+    <p class="ct-page-subtitle">{{ _('Un parcours simple et entièrement digital pour optimiser vos réserves de pension.') }}</p>
+  </div>
+</section>
+
+<section class="ct-section ct-section-white">
+  <div class="container">
+    {% set steps = [
+      ('bi-person-plus', _('Créez votre compte'), _('Inscrivez-vous en quelques minutes avec votre adresse email. Vos données sont protégées selon les normes GDPR et stockées de manière chiffrée en Belgique.')),
+      ('bi-cloud-upload', _('Importez votre extrait mypension.be'), _('Connectez-vous sur mypension.be avec votre eID ou itsme®, téléchargez votre extrait PDF et importez-le dans votre espace CoreTwo. Notre système l\'analyse automatiquement.')),
+      ('bi-search', _('Analyse d\'éligibilité'), _('Nous identifions vos contrats de branche 21 actifs, calculons le montant transférable et vous informons sur les conditions de transfert applicables à votre situation.')),
+      ('bi-clipboard-check', _('Questionnaire investisseur'), _('Un questionnaire de 8 questions MiFID évalue votre horizon d\'investissement, votre tolérance au risque et vos objectifs financiers pour déterminer votre profil.')),
+      ('bi-grid-1x2', _('Sélection du produit'), _('Nous vous présentons les produits de branche 23 correspondant à votre profil investisseur, avec leurs caractéristiques, rendements attendus et frais.')),
+      ('bi-pen-fill', _('Souscription & signature'), _('Vérifiez votre dossier complet, signez électroniquement votre contrat et notre équipe prend en charge le transfert auprès de votre institution actuelle.')),
+    ] %}
+    {% for icon, title, desc in steps %}
+    <div class="row align-items-center g-4 mb-5 {% if loop.even %}flex-lg-row-reverse{% endif %}">
+      <div class="col-lg-2 text-center">
+        <div class="ct-timeline-step">
+          <div class="ct-timeline-number">{{ loop.index }}</div>
+          <div class="ct-timeline-icon"><i class="bi {{ icon }}"></i></div>
+        </div>
+        {% if not loop.last %}<div class="ct-timeline-line d-none d-lg-block"></div>{% endif %}
+      </div>
+      <div class="col-lg-10">
+        <div class="ct-hiw-card">
+          <h4>{{ title }}</h4>
+          <p class="text-muted mb-0">{{ desc }}</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="ct-cta-section">
+  <div class="container text-center">
+    <h2 class="ct-cta-title">{{ _('Commencez maintenant') }}</h2>
+    <p class="ct-cta-subtitle">{{ _('Votre analyse est gratuite et sans engagement.') }}</p>
+    <a href="{{ url_for('auth.register') }}" class="btn ct-btn-primary ct-btn-lg">
+      <i class="bi bi-arrow-up-right-circle me-2"></i>{{ _('Créer mon compte') }}
+    </a>
+  </div>
+</section>
+{% endblock %}

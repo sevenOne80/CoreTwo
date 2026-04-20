@@ -1,0 +1,75 @@
+{% extends 'portal/base_portal.html' %}
+{% block title %}{{ _('Étape 6 — Signature') }}{% endblock %}
+
+{% block portal_content %}
+{% include 'portal/onboarding/_progress.html' %}
+
+<div class="ct-onboarding-card">
+  <div class="ct-onboarding-icon"><i class="bi bi-pen-fill"></i></div>
+  <h3>{{ _('Signez votre souscription') }}</h3>
+  <p class="text-muted">{{ _('Vérifiez les détails de votre souscription avant de signer électroniquement.') }}</p>
+
+  <!-- Summary -->
+  <div class="ct-summary-box mb-4">
+    <h6 class="ct-summary-title">{{ _('Récapitulatif de votre dossier') }}</h6>
+    <div class="row g-2">
+      <div class="col-sm-6">
+        <div class="ct-summary-item">
+          <span class="ct-summary-label">{{ _('Titulaire') }}</span>
+          <span class="ct-summary-value">{{ current_user.full_name }}</span>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="ct-summary-item">
+          <span class="ct-summary-label">{{ _('Référence') }}</span>
+          <span class="ct-summary-value">{{ subscription.reference }}</span>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="ct-summary-item">
+          <span class="ct-summary-label">{{ _('Produit') }}</span>
+          <span class="ct-summary-value">{{ subscription.product.name(current_lang) }}</span>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="ct-summary-item">
+          <span class="ct-summary-label">{{ _('Montant') }}</span>
+          <span class="ct-summary-value ct-amount">€ {{ '{:,.2f}'.format(subscription.amount) }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form method="POST" novalidate>
+    {{ form.hidden_tag() }}
+    <div class="ct-sign-checkboxes">
+      <div class="form-check ct-sign-check">
+        {{ form.agree_terms(class='form-check-input' + (' is-invalid' if form.agree_terms.errors else '')) }}
+        <label class="form-check-label">
+          {{ _('J\'ai lu et j\'accepte les') }}
+          <a href="#" class="ct-form-link">{{ _('conditions générales') }}</a>
+          {{ _('et la') }}
+          <a href="#" class="ct-form-link">{{ _('fiche d\'information du produit') }}</a>.
+        </label>
+        {% for error in form.agree_terms.errors %}<div class="invalid-feedback">{{ error }}</div>{% endfor %}
+      </div>
+      <div class="form-check ct-sign-check mt-3">
+        {{ form.agree_info(class='form-check-input' + (' is-invalid' if form.agree_info.errors else '')) }}
+        <label class="form-check-label">
+          {{ _('Je confirme que les informations fournies sont exactes et que ce produit correspond à mon profil investisseur.') }}
+        </label>
+        {% for error in form.agree_info.errors %}<div class="invalid-feedback">{{ error }}</div>{% endfor %}
+      </div>
+    </div>
+
+    <div class="ct-onboarding-actions">
+      <a href="{{ url_for('portal.onboarding_step', step=5) }}" class="btn ct-btn-outline-secondary">
+        <i class="bi bi-arrow-left me-2"></i>{{ _('Retour') }}
+      </a>
+      <button type="submit" class="btn ct-btn-primary ct-btn-sign">
+        <i class="bi bi-pen me-2"></i>{{ _('Signer et soumettre') }}
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}

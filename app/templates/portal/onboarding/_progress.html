@@ -1,0 +1,16 @@
+{% set step_labels = [_('Identité'), _('Extrait'), _('Analyse'), _('Profil'), _('Produit'), _('Signature')] %}
+<div class="ct-onboarding-progress mb-4">
+  {% for label in step_labels %}
+  {% set i = loop.index %}
+  <div class="ct-ob-step {% if i < step %}done{% elif i == step %}active{% endif %}">
+    <div class="ct-ob-step-circle">
+      {% if i < step %}<i class="bi bi-check-lg"></i>
+      {% else %}{{ i }}{% endif %}
+    </div>
+    <span class="ct-ob-step-label d-none d-md-block">{{ label }}</span>
+  </div>
+  {% if not loop.last %}
+  <div class="ct-ob-connector {% if i < step %}done{% endif %}"></div>
+  {% endif %}
+  {% endfor %}
+</div>

@@ -1,0 +1,123 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: CoreTwo 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: nl\n"
+
+msgid "Comment ça marche"
+msgstr "Hoe het werkt"
+
+msgid "À propos"
+msgstr "Over ons"
+
+msgid "Contact"
+msgstr "Contact"
+
+msgid "Connexion"
+msgstr "Inloggen"
+
+msgid "Commencer"
+msgstr "Beginnen"
+
+msgid "CoreTwo - Transférez vos réserves de pension vers des investissements adaptés à votre profil"
+msgstr "CoreTwo - Zet uw pensioenreserves over naar beleggingen die zijn afgestemd op uw profiel"
+
+msgid "Optimisation de pension"
+msgstr "Pensioenoptimalisatie"
+
+msgid "Libérez le potentiel de vos réserves de pension"
+msgstr "Benut het potentieel van uw pensioenreserves"
+
+msgid "Analysez gratuitement vos contrats de branche 21 et découvrez si vous pouvez optimiser vos rendements avec une branche 23 adaptée à votre profil."
+msgstr "Analyseer gratis uw tak 21-contracten en ontdek of u uw rendementen kunt optimaliseren met een tak 23 die is afgestemd op uw profiel."
+
+msgid "Analyser ma pension"
+msgstr "Mijn pensioen analyseren"
+
+msgid "Comment ça marche ?"
+msgstr "Hoe werkt het?"
+
+msgid "Réserves analysées"
+msgstr "Geanalyseerde reserves"
+
+msgid "Clients accompagnés"
+msgstr "Begeleide klanten"
+
+msgid "Processus en ligne"
+msgstr "Online proces"
+
+msgid "Agréé BNB"
+msgstr "NBB erkend"
+
+msgid "Mon espace"
+msgstr "Mijn ruimte"
+
+msgid "Documents"
+msgstr "Documenten"
+
+msgid "Profil"
+msgstr "Profiel"
+
+msgid "Déconnexion"
+msgstr "Uitloggen"
+
+msgid "Votre partenaire pour optimiser vos réserves de pension."
+msgstr "Uw partner voor het optimaliseren van uw pensioenreserves."
+
+msgid "Navigation"
+msgstr "Navigatie"
+
+msgid "Créer un compte"
+msgstr "Account aanmaken"
+
+msgid "Tous droits réservés."
+msgstr "Alle rechten voorbehouden."
+
+msgid "Mentions légales"
+msgstr "Wettelijke vermeldingen"
+
+msgid "Politique de confidentialité"
+msgstr "Privacybeleid"
+
+msgid "reconnu"
+msgstr "erkend"
+
+msgid "Tableau de bord"
+msgstr "Dashboard"
+
+msgid "Mon onboarding"
+msgstr "Mijn onboarding"
+
+msgid "Mon profil"
+msgstr "Mijn profiel"
+
+msgid "Créer votre compte"
+msgstr "Uw account aanmaken"
+
+msgid "Gratuit — sans engagement — analyse immédiate"
+msgstr "Gratis — vrijblijvend — onmiddellijke analyse"
+
+msgid "Prénom"
+msgstr "Voornaam"
+
+msgid "Nom"
+msgstr "Achternaam"
+
+msgid "Adresse email"
+msgstr "E-mailadres"
+
+msgid "Mot de passe"
+msgstr "Wachtwoord"
+
+msgid "Confirmer le mot de passe"
+msgstr "Wachtwoord bevestigen"
+
+msgid "Créer mon compte"
+msgstr "Mijn account aanmaken"
+
+msgid "Déjà un compte ?"
+msgstr "Heeft u al een account?"
+
+msgid "Se connecter"
+msgstr "Inloggen"

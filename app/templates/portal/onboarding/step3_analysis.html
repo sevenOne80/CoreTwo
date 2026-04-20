@@ -1,0 +1,88 @@
+{% extends 'portal/base_portal.html' %}
+{% block title %}{{ _('Étape 3 — Résultat de l\'analyse') }}{% endblock %}
+
+{% block portal_content %}
+{% include 'portal/onboarding/_progress.html' %}
+
+<div class="ct-onboarding-card">
+  <div class="ct-onboarding-icon {% if eligibility.is_eligible %}ct-icon-success{% else %}ct-icon-warning{% endif %}">
+    <i class="bi {% if eligibility.is_eligible %}bi-check-circle{% else %}bi-exclamation-circle{% endif %}"></i>
+  </div>
+  <h3>{{ _('Résultat de l\'analyse') }}</h3>
+
+  {% if eligibility.is_eligible %}
+  <div class="ct-result-eligible">
+    <div class="ct-result-badge success">
+      <i class="bi bi-check-circle-fill me-2"></i>{{ _('Éligible au transfert') }}
+    </div>
+    <div class="row g-3 mt-3">
+      <div class="col-md-4">
+        <div class="ct-result-stat">
+          <span class="ct-result-stat-value">€ {{ '{:,.2f}'.format(eligibility.transferable_amount or 0) }}</span>
+          <span class="ct-result-stat-label">{{ _('Montant transférable') }}</span>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="ct-result-stat">
+          <span class="ct-result-stat-value">{{ eligibility.contracts | length }}</span>
+          <span class="ct-result-stat-label">{{ _('Contrats branche 21') }}</span>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="ct-result-stat">
+          <span class="ct-result-stat-value">{{ eligibility.current_institution or '—' }}</span>
+          <span class="ct-result-stat-label">{{ _('Institution actuelle') }}</span>
+        </div>
+      </div>
+    </div>
+
+    {% if eligibility.contracts %}
+    <h6 class="mt-4 mb-3">{{ _('Contrats identifiés') }}</h6>
+    <div class="ct-contracts-list">
+      {% for contract in eligibility.contracts %}
+      <div class="ct-contract-item">
+        <div class="ct-contract-icon"><i class="bi bi-file-earmark-text"></i></div>
+        <div class="ct-contract-info">
+          <strong>{{ contract.get('institution', '—') }}</strong>
+          <span class="text-muted small">{{ _('Branche 21') }}</span>
+        </div>
+        <div class="ct-contract-amount">
+          {% if contract.get('amount') %}€ {{ '{:,.2f}'.format(contract.amount) }}{% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+  {% else %}
+  <div class="ct-result-ineligible">
+    <div class="ct-result-badge warning">
+      <i class="bi bi-exclamation-circle-fill me-2"></i>
+      {% if eligibility.reason == 'no_branch21_contracts' %}
+        {{ _('Aucun contrat de branche 21 détecté') }}
+      {% elif eligibility.reason == 'amount_too_low' %}
+        {{ _('Montant insuffisant pour un transfert') }}
+      {% else %}
+        {{ _('Non éligible au transfert actuellement') }}
+      {% endif %}
+    </div>
+    <p class="mt-3 text-muted">{{ _('Nous vous invitons à nous contacter pour explorer d\'autres options.') }}</p>
+    <a href="{{ url_for('main.contact') }}" class="btn ct-btn-outline-primary mt-2">
+      {{ _('Contacter CoreTwo') }}
+    </a>
+  </div>
+  {% endif %}
+
+  <div class="ct-onboarding-actions">
+    <a href="{{ url_for('portal.onboarding_step', step=2) }}" class="btn ct-btn-outline-secondary">
+      <i class="bi bi-arrow-left me-2"></i>{{ _('Retour') }}
+    </a>
+    {% if eligibility.is_eligible %}
+    <a href="{{ url_for('portal.onboarding_step', step=4) }}" class="btn ct-btn-primary">
+      {{ _('Continuer') }} <i class="bi bi-arrow-right ms-2"></i>
+    </a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

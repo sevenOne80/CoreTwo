@@ -1,0 +1,115 @@
+{% extends 'portal/base_portal.html' %}
+{% block title %}{{ _('Tableau de bord') }}{% endblock %}
+
+{% block portal_content %}
+<div class="ct-portal-header">
+  <h2>{{ _('Bonjour,') }} {{ current_user.first_name }} 👋</h2>
+  <p class="text-muted">{{ _('Voici l\'état de votre dossier.') }}</p>
+</div>
+
+<!-- Progress tracker -->
+<div class="ct-progress-tracker mb-4">
+  {% set steps_info = [
+    (_('Identité'), 'bi-person'),
+    (_('Extrait'), 'bi-cloud-upload'),
+    (_('Analyse'), 'bi-search'),
+    (_('Profil'), 'bi-clipboard-check'),
+    (_('Produit'), 'bi-grid-1x2'),
+    (_('Signature'), 'bi-pen'),
+  ] %}
+  {% for label, icon in steps_info %}
+  <div class="ct-progress-step {% if loop.index <= current_user.onboarding_step %}completed{% elif loop.index == current_user.onboarding_step + 1 %}active{% endif %}">
+    <div class="ct-progress-step-circle">
+      {% if loop.index <= current_user.onboarding_step %}
+      <i class="bi bi-check-lg"></i>
+      {% else %}
+      <i class="bi {{ icon }}"></i>
+      {% endif %}
+    </div>
+    <span class="ct-progress-step-label">{{ label }}</span>
+  </div>
+  {% if not loop.last %}
+  <div class="ct-progress-connector {% if loop.index < current_user.onboarding_step %}completed{% endif %}"></div>
+  {% endif %}
+  {% endfor %}
+</div>
+
+<!-- Status cards -->
+<div class="row g-3 mb-4">
+  {% set eligibility = current_user.latest_eligibility %}
+  <div class="col-md-4">
+    <div class="ct-dash-card">
+      <div class="ct-dash-card-icon {% if current_user.onboarding_step >= 1 %}success{% else %}pending{% endif %}">
+        <i class="bi bi-person-check"></i>
+      </div>
+      <div>
+        <h6 class="mb-1">{{ _('Identité') }}</h6>
+        <p class="small text-muted mb-0">
+          {% if current_user.onboarding_step >= 1 %}{{ _('Complété') }}{% else %}{{ _('À compléter') }}{% endif %}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="ct-dash-card">
+      <div class="ct-dash-card-icon {% if eligibility %}{{ 'success' if eligibility.is_eligible else 'danger' }}{% else %}pending{% endif %}">
+        <i class="bi bi-graph-up-arrow"></i>
+      </div>
+      <div>
+        <h6 class="mb-1">{{ _('Éligibilité') }}</h6>
+        <p class="small text-muted mb-0">
+          {% if eligibility %}
+            {% if eligibility.is_eligible %}
+              {{ _('Éligible — ') }}{{ eligibility.transferable_amount | round(0) }}€
+            {% else %}{{ _('Non éligible') }}{% endif %}
+          {% else %}{{ _('En attente d\'analyse') }}{% endif %}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="ct-dash-card">
+      {% set sub = current_user.subscriptions.first() %}
+      <div class="ct-dash-card-icon {% if sub and sub.status in ['signed','active'] %}success{% elif sub %}warning{% else %}pending{% endif %}">
+        <i class="bi bi-file-earmark-check"></i>
+      </div>
+      <div>
+        <h6 class="mb-1">{{ _('Souscription') }}</h6>
+        <p class="small text-muted mb-0">
+          {% if sub %}{{ _(sub.status) }}{% else %}{{ _('Non commencée') }}{% endif %}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Next action -->
+{% if current_user.onboarding_step < 6 %}
+<div class="ct-next-action">
+  <div>
+    <h5 class="mb-1">{{ _('Prochaine étape') }}</h5>
+    <p class="text-muted mb-0">
+      {% if current_user.onboarding_step == 0 %}{{ _('Complétez vos informations personnelles.') }}
+      {% elif current_user.onboarding_step == 1 %}{{ _('Importez votre extrait mypension.be.') }}
+      {% elif current_user.onboarding_step == 2 %}{{ _('Consultez votre analyse d\'éligibilité.') }}
+      {% elif current_user.onboarding_step == 3 %}{{ _('Complétez votre profil investisseur.') }}
+      {% elif current_user.onboarding_step == 4 %}{{ _('Sélectionnez votre produit de branche 23.') }}
+      {% elif current_user.onboarding_step == 5 %}{{ _('Signez votre contrat de souscription.') }}
+      {% endif %}
+    </p>
+  </div>
+  <a href="{{ url_for('portal.onboarding_step', step=current_user.onboarding_step + 1) }}"
+     class="btn ct-btn-primary">
+    {{ _('Continuer') }} <i class="bi bi-arrow-right ms-1"></i>
+  </a>
+</div>
+{% else %}
+<div class="ct-next-action ct-next-action-complete">
+  <i class="bi bi-check-circle-fill text-success fs-3 me-3"></i>
+  <div>
+    <h5 class="mb-1">{{ _('Dossier complet') }}</h5>
+    <p class="text-muted mb-0">{{ _('Votre souscription est en cours de traitement.') }}</p>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

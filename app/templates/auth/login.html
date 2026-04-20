@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}{{ _('Connexion') }}{% endblock %}
+{% block body_class %}auth-page{% endblock %}
+
+{% block content %}
+<div class="ct-auth-wrapper">
+  <div class="ct-auth-card">
+    <div class="ct-auth-header">
+      <a href="{{ url_for('main.index') }}" class="ct-auth-logo">
+        <span class="ct-logo-icon">C<span class="ct-logo-two">2</span></span>
+        <span class="ct-logo-text">CoreTwo</span>
+      </a>
+      <h2 class="ct-auth-title">{{ _('Connexion') }}</h2>
+      <p class="ct-auth-subtitle">{{ _('Accédez à votre espace personnel') }}</p>
+    </div>
+
+    <form method="POST" action="{{ url_for('auth.login') }}" novalidate class="ct-auth-form">
+      {{ form.hidden_tag() }}
+      <div class="mb-3">
+        <label class="form-label ct-form-label">{{ _('Adresse email') }}</label>
+        {{ form.email(class='form-control ct-form-control' + (' is-invalid' if form.email.errors else ''),
+                      placeholder='email@exemple.be', autocomplete='email') }}
+        {% for error in form.email.errors %}
+        <div class="invalid-feedback">{{ error }}</div>
+        {% endfor %}
+      </div>
+      <div class="mb-3">
+        <div class="d-flex justify-content-between align-items-center">
+          <label class="form-label ct-form-label mb-0">{{ _('Mot de passe') }}</label>
+          <a href="#" class="ct-form-link small">{{ _('Mot de passe oublié ?') }}</a>
+        </div>
+        {{ form.password(class='form-control ct-form-control' + (' is-invalid' if form.password.errors else ''),
+                         placeholder='••••••••', autocomplete='current-password') }}
+        {% for error in form.password.errors %}
+        <div class="invalid-feedback">{{ error }}</div>
+        {% endfor %}
+      </div>
+      <div class="mb-4 form-check">
+        {{ form.remember_me(class='form-check-input') }}
+        <label class="form-check-label small text-muted">{{ _('Se souvenir de moi') }}</label>
+      </div>
+      <button type="submit" class="btn ct-btn-primary w-100 ct-btn-lg">
+        {{ _('Se connecter') }}
+      </button>
+    </form>
+
+    <p class="ct-auth-switch">
+      {{ _('Pas encore de compte ?') }}
+      <a href="{{ url_for('auth.register') }}">{{ _('Créer un compte') }}</a>
+    </p>
+  </div>
+</div>
+{% endblock %}

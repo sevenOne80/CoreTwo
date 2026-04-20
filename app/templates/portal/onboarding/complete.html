@@ -1,0 +1,31 @@
+{% extends 'portal/base_portal.html' %}
+{% block title %}{{ _('Souscription envoyée') }}{% endblock %}
+
+{% block portal_content %}
+<div class="ct-onboarding-card ct-complete-card text-center">
+  <div class="ct-complete-icon">
+    <i class="bi bi-check-circle-fill"></i>
+  </div>
+  <h2>{{ _('Votre dossier est soumis !') }}</h2>
+  <p class="text-muted">
+    {{ _('Merci, ') }}{{ current_user.first_name }}{{ _('. Votre souscription a été enregistrée avec succès. Notre équipe va maintenant traiter votre dossier et vous contacter dans les 24 à 48 heures ouvrables.') }}
+  </p>
+  <div class="ct-complete-steps mt-4">
+    <div class="ct-complete-step">
+      <i class="bi bi-envelope-check"></i>
+      <p>{{ _('Email de confirmation envoyé') }}</p>
+    </div>
+    <div class="ct-complete-step">
+      <i class="bi bi-clock-history"></i>
+      <p>{{ _('Traitement sous 48h') }}</p>
+    </div>
+    <div class="ct-complete-step">
+      <i class="bi bi-arrow-repeat"></i>
+      <p>{{ _('Transfert sous 2 à 4 semaines') }}</p>
+    </div>
+  </div>
+  <a href="{{ url_for('portal.dashboard') }}" class="btn ct-btn-primary mt-4">
+    {{ _('Retour au tableau de bord') }}
+  </a>
+</div>
+{% endblock %}

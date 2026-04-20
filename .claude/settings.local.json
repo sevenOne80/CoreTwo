@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Program Files/MySQL/**)",
+      "Read(//c/xampp/mysql/bin/**)",
+      "Read(//c/wamp64/bin/**)",
+      "Bash(sc query *)",
+      "Read(//c/Program Files/HeidiSQL/**)",
+      "Read(//c/Program Files \\(x86\\)/**)"
+    ]
+  }
+}

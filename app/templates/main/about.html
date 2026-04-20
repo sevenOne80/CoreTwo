@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block title %}{{ _('À propos') }}{% endblock %}
+
+{% block content %}
+<section class="ct-page-hero ct-page-hero-sm">
+  <div class="ct-hero-overlay"></div>
+  <div class="container position-relative text-center">
+    <h1 class="ct-page-title">{{ _('À propos de CoreTwo') }}</h1>
+    <p class="ct-page-subtitle">{{ _('Un MGA belge spécialisé dans l\'optimisation de pension.') }}</p>
+  </div>
+</section>
+
+<section class="ct-section ct-section-white">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <p class="ct-section-eyebrow">{{ _('Notre mission') }}</p>
+        <h2 class="ct-section-title">{{ _('Pourquoi CoreTwo existe') }}</h2>
+        <p class="text-muted">
+          {{ _('Des millions de Belges ont des réserves dormantes dans des contrats de branche 21 dont le rendement ne suit plus l\'inflation. CoreTwo a été fondé pour aider ces épargnants à accéder à des solutions de branche 23 adaptées à leur profil, de façon simple, transparente et entièrement digitale.') }}
+        </p>
+        <p class="text-muted">
+          {{ _('En tant que MGA (Managing General Agent), nous opérons pour le compte de compagnies d\'assurance reconnues par la Banque Nationale de Belgique comme institutions de pension, vous offrant ainsi toutes les garanties réglementaires.') }}
+        </p>
+      </div>
+      <div class="col-lg-6">
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="ct-about-stat-card">
+              <i class="bi bi-building ct-about-icon"></i>
+              <h4>MGA</h4>
+              <p>{{ _('Managing General Agent agréé') }}</p>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="ct-about-stat-card">
+              <i class="bi bi-bank ct-about-icon"></i>
+              <h4>BNB</h4>
+              <p>{{ _('Partenaires reconnus par la Banque Nationale') }}</p>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="ct-about-stat-card">
+              <i class="bi bi-lock ct-about-icon"></i>
+              <h4>GDPR</h4>
+              <p>{{ _('Données protégées et stockées en Belgique') }}</p>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="ct-about-stat-card">
+              <i class="bi bi-globe-europe-africa ct-about-icon"></i>
+              <h4>FR · NL · EN</h4>
+              <p>{{ _('Service en trois langues') }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ct-section ct-section-dark">
+  <div class="container text-center">
+    <p class="ct-section-eyebrow ct-eyebrow-light">{{ _('Notre cadre réglementaire') }}</p>
+    <h2 class="ct-section-title text-white">{{ _('Nous opérons dans un cadre strictement réglementé') }}</h2>
+    <div class="row g-4 mt-3">
+      <div class="col-md-4">
+        <div class="ct-reg-card">
+          <i class="bi bi-shield-check"></i>
+          <h6>{{ _('Reconnaissance BNB') }}</h6>
+          <p class="small">{{ _('Nos partenaires assureurs sont reconnus par la Banque Nationale de Belgique comme institutions de pension agréées.') }}</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="ct-reg-card">
+          <i class="bi bi-clipboard-data"></i>
+          <h6>{{ _('Questionnaire MiFID') }}</h6>
+          <p class="small">{{ _('Conformément à la réglementation MiFID II, nous évaluons votre profil investisseur avant toute souscription.') }}</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="ct-reg-card">
+          <i class="bi bi-file-earmark-lock"></i>
+          <h6>{{ _('Protection GDPR') }}</h6>
+          <p class="small">{{ _('Vos données personnelles et financières sont traitées selon le Règlement Général sur la Protection des Données.') }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

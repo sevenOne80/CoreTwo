@@ -1,0 +1,93 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: CoreTwo 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
+
+msgid "Comment ça marche"
+msgstr "Comment ça marche"
+
+msgid "À propos"
+msgstr "À propos"
+
+msgid "Contact"
+msgstr "Contact"
+
+msgid "Connexion"
+msgstr "Connexion"
+
+msgid "Commencer"
+msgstr "Commencer"
+
+msgid "CoreTwo - Transférez vos réserves de pension vers des investissements adaptés à votre profil"
+msgstr "CoreTwo - Transférez vos réserves de pension vers des investissements adaptés à votre profil"
+
+msgid "Optimisation de pension"
+msgstr "Optimisation de pension"
+
+msgid "Libérez le potentiel de vos réserves de pension"
+msgstr "Libérez le potentiel de vos réserves de pension"
+
+msgid "Analysez gratuitement vos contrats de branche 21 et découvrez si vous pouvez optimiser vos rendements avec une branche 23 adaptée à votre profil."
+msgstr "Analysez gratuitement vos contrats de branche 21 et découvrez si vous pouvez optimiser vos rendements avec une branche 23 adaptée à votre profil."
+
+msgid "Analyser ma pension"
+msgstr "Analyser ma pension"
+
+msgid "Réserves analysées"
+msgstr "Réserves analysées"
+
+msgid "Clients accompagnés"
+msgstr "Clients accompagnés"
+
+msgid "Processus en ligne"
+msgstr "Processus en ligne"
+
+msgid "Agréé BNB"
+msgstr "Agréé BNB"
+
+msgid "Mon espace"
+msgstr "Mon espace"
+
+msgid "Documents"
+msgstr "Documents"
+
+msgid "Profil"
+msgstr "Profil"
+
+msgid "Déconnexion"
+msgstr "Déconnexion"
+
+msgid "Votre partenaire pour optimiser vos réserves de pension."
+msgstr "Votre partenaire pour optimiser vos réserves de pension."
+
+msgid "CoreTwo est un courtier en assurances agréé, travaillant avec des compagnies reconnues par la BNB comme institutions de pension."
+msgstr "CoreTwo est un courtier en assurances agréé, travaillant avec des compagnies reconnues par la BNB comme institutions de pension."
+
+msgid "Navigation"
+msgstr "Navigation"
+
+msgid "Créer un compte"
+msgstr "Créer un compte"
+
+msgid "Tous droits réservés."
+msgstr "Tous droits réservés."
+
+msgid "Mentions légales"
+msgstr "Mentions légales"
+
+msgid "Politique de confidentialité"
+msgstr "Politique de confidentialité"
+
+msgid "reconnu"
+msgstr "reconnu"
+
+msgid "Tableau de bord"
+msgstr "Tableau de bord"
+
+msgid "Mon onboarding"
+msgstr "Mon onboarding"
+
+msgid "Mon profil"
+msgstr "Mon profil"
