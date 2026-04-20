@@ -6,7 +6,7 @@ from app.extensions import db, login_manager, babel, mail, csrf
 
 # Load .env explicitly using absolute path so it works on PythonAnywhere
 _here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-load_dotenv(os.path.join(_here, '.env'))
+load_dotenv(os.path.join(_here, '.env'), override=True)
 
 
 def get_locale():
